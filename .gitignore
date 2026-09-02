@@ -1,0 +1,11 @@
+.venv/
+data/
+*.vcf.gz
+*.vcf.gz.tbi
+*.bam
+*.bai
+*.cram
+*.crai
+__pycache__/
+*.pyc
+.DS_Store
