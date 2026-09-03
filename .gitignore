@@ -1,5 +1,8 @@
 .venv/
 data/
+cache
+output
+work
 *.vcf.gz
 *.vcf.gz.tbi
 *.bam

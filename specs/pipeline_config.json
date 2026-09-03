@@ -1,0 +1,44 @@
+{
+  "expected_reference_build": "GRCh38",
+  "panel_padding_bp": 50000,
+  "accept_filter_values": ["PASS"],
+  "accept_unfiltered_dot": true,
+  "min_gq": 20,
+  "min_dp": 10,
+  "missing_gq_policy": "retain_with_flag",
+  "missing_dp_policy": "retain_with_flag",
+  "low_gq_policy": "exclude",
+  "low_dp_policy": "exclude",
+  "emit_alt_alleles": "represented_in_proband_gt",
+  "required_genotype_format": ["GT"],
+  "optional_genotype_format": ["GQ", "DP", "PID", "PGT"],
+  "mini_reference": {
+    "phasing_boundary_buffer_bp": 1000,
+    "require_unique_source_coordinate_mapping": true,
+    "require_ref_match": true
+  },
+  "whatshap": {
+    "min_mapping_quality": 20,
+    "min_base_quality": 20,
+    "use_ignore_read_groups": false,
+    "use_distrust_genotypes": false
+  },
+  "epcr": {
+    "weights": {
+      "gene_prior": 0.20,
+      "phase": 0.20,
+      "functional_consequence": 0.25,
+      "population_frequency": 0.15,
+      "splice_evidence": 0.10,
+      "read_support": 0.05,
+      "phenotype_fit": 0.05
+    },
+    "phase_values": {
+      "trans_supported": 1.0,
+      "phase_ambiguous": 0.5,
+      "cis_supported": 0.0
+    },
+    "cis_policy": "exclude",
+    "score_rounding_decimals": 6
+  }
+}
