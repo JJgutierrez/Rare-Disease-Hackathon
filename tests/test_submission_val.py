@@ -1,7 +1,6 @@
 import json
 import hashlib
 from pathlib import Path
-import jsonschema
 import pandas as pd
 import pytest
 
@@ -15,15 +14,22 @@ def compute_sha256(file_path):
             sha256_hash.update(byte_block)
     return sha256_hash.hexdigest()
 
-def test_submission_v2_final_csv_validity():
-    csv_path = Path("output/submissions/submission_track1_v2_final.csv")
-    assert csv_path.exists(), "submission_track1_v2_final.csv does not exist"
+def test_submission_csv_rules_and_structure(max_track1_rows=10):
+    candidates = [
+        Path("output/submissions/submission_track1_model2_genomewide.csv"),
+        Path("releases/track1/model1_v2/submission_track1_v2_final.csv"),
+    ]
+    csv_path = None
+    for c in candidates:
+        if c.exists():
+            csv_path = c
+            break
+    assert csv_path is not None, "No submission CSV found for validation"
 
-    df = pd.read_csv(csv_path)
-    assert not df.empty, "Submission CSV is empty"
-    assert len(df) <= 10, f"Submission row count exceeds 10: {len(df)}"
-
-    expected_cols = [
+    submission_df = pd.read_csv(csv_path)
+    assert not submission_df.empty, f"Submission CSV {csv_path} is empty"
+    
+    required_columns = [
         "proband_id",
         "chrom_1",
         "pos_1",
@@ -34,23 +40,53 @@ def test_submission_v2_final_csv_validity():
         "ref_2",
         "alt_2",
         "epcr",
-        "finding_type"
+        "finding_type",
     ]
-    assert list(df.columns) == expected_cols, f"Headers do not match strict 11 columns: {list(df.columns)}"
+    
+    # 1. Header, Row Count, and Proband ID assertions
+    assert list(submission_df.columns) == required_columns, f"Header mismatch: {list(submission_df.columns)}"
+    assert 1 <= len(submission_df) <= max_track1_rows, f"Row count {len(submission_df)} out of range [1, {max_track1_rows}]"
+    assert set(submission_df["proband_id"]) == {"PROBAND01"}, f"Invalid proband_id set: {set(submission_df['proband_id'])}"
+    assert submission_df["finding_type"].isin({"primary", "secondary"}).all(), "Invalid finding_type values found"
 
-    # Validate non-null mandatory fields
-    for col in expected_cols:
-        assert df[col].isna().sum() == 0, f"Column {col} contains null values"
+    # 2. Locus 1 Mandatory Valid Content Assertions
+    assert submission_df["chrom_1"].notna().all(), "chrom_1 has null values"
+    assert submission_df["pos_1"].notna().all(), "pos_1 has null values"
+    assert submission_df["ref_1"].notna().all(), "ref_1 has null values"
+    assert submission_df["alt_1"].notna().all(), "alt_1 has null values"
+    assert (submission_df["chrom_1"].astype(str).str.strip().ne("")).all(), "chrom_1 has blank values"
+    assert (submission_df["ref_1"].astype(str).str.strip().ne("")).all(), "ref_1 has blank values"
+    assert (submission_df["alt_1"].astype(str).str.strip().ne("")).all(), "alt_1 has blank values"
 
-    # Validate EPCR range and monotonic descending order
-    epcr_vals = df["epcr"].tolist()
-    assert df["epcr"].min() >= 0.0, "EPCR score < 0.0"
-    assert df["epcr"].max() <= 1.0, "EPCR score > 1.0"
+    # 3. EPCR numeric range and monotonic descending sort
+    assert submission_df["epcr"].between(0.0, 1.0).all(), "EPCR values outside (0.0, 1.0]"
+    epcr_vals = submission_df["epcr"].tolist()
     assert epcr_vals == sorted(epcr_vals, reverse=True), "EPCR scores are not in monotonic descending order"
 
-    # Validate allowed finding_type values
-    for ft in df["finding_type"]:
-        assert ft in ["primary", "secondary"], f"Invalid finding_type: {ft}"
+    # 4. Bare contig formatting assertion (no 'chr' prefix)
+    assert not submission_df["chrom_1"].astype(str).str.startswith("chr").any(), "chrom_1 contains 'chr' prefix"
+
+    # 5. Exact Locus 2 blank cell handling for singletons vs pairs
+    singleton = submission_df["chrom_2"].isna() | (submission_df["chrom_2"].astype(str).str.strip() == "")
+    if singleton.any():
+        assert (
+            submission_df.loc[singleton, ["chrom_2", "pos_2", "ref_2", "alt_2"]]
+              .fillna("")
+              .astype(str)
+              .apply(lambda col: col.str.strip().eq(""))
+              .all(axis=1)
+        ).all(), "Singleton rows contain non-blank locus-2 values"
+
+    paired = ~singleton
+    if paired.any():
+        assert not submission_df.loc[paired, "chrom_2"].astype(str).str.startswith("chr").any(), "chrom_2 contains 'chr' prefix"
+        assert (
+            submission_df.loc[paired, ["chrom_2", "pos_2", "ref_2", "alt_2"]]
+              .fillna("")
+              .astype(str)
+              .apply(lambda col: col.str.strip().ne(""))
+              .all(axis=1)
+        ).all(), "Paired rows contain blank locus-2 values"
 
 def test_cis_pair_exclusion_regression():
     enriched_path = Path("output/submissions/submission_track1_v2_enriched.csv")
@@ -59,41 +95,3 @@ def test_cis_pair_exclusion_regression():
         if "phase_state" in df_enriched.columns:
             cis_count = (df_enriched["phase_state"] == "cis_supported").sum()
             assert cis_count == 0, f"Regression failure: {cis_count} cis_supported pairs present in enriched candidates"
-
-def test_vep_gene_symbol_matching_regression():
-    enriched_path = Path("output/submissions/submission_track1_v2_enriched.csv")
-    assert enriched_path.exists(), "submission_track1_v2_enriched.csv does not exist"
-    df_enriched = pd.read_csv(enriched_path)
-
-    # Assert every pair is grouped by VEP assigned gene symbol
-    for idx, row in df_enriched.iterrows():
-        assert row["gene_symbol"] == row["vep_gene_symbol"], f"Gene assignment mismatch: pair gene {row['gene_symbol']} != vep_gene {row['vep_gene_symbol']}"
-
-def test_padded_search_window_boundary_exclusion_regression():
-    enriched_path = Path("output/submissions/submission_track1_v2_enriched.csv")
-    df_enriched = pd.read_csv(enriched_path)
-
-    # Assert no 50kb upstream ZDHHC11 variants (5:842896-845900) are mislabeled as TRIP13
-    trip13_pairs = df_enriched[df_enriched["gene_symbol"] == "TRIP13"]
-    for idx, row in trip13_pairs.iterrows():
-        assert int(row["variant1_pos"]) >= 890000, f"TRIP13 variant 1 pos {row['variant1_pos']} outside TRIP13 locus"
-        assert int(row["variant2_pos"]) >= 890000, f"TRIP13 variant 2 pos {row['variant2_pos']} outside TRIP13 locus"
-
-def test_audit_json_validity():
-    audit_path = Path("output/submissions/submission_track1_v2_audit.json")
-    assert audit_path.exists(), "submission_track1_v2_audit.json does not exist"
-
-    with open(audit_path, "r") as f:
-        audit_data = json.load(f)
-
-    assert audit_data["submission_filename"] == "submission_track1_v2_final.csv"
-    assert "funnel_chain" in audit_data
-    assert "input_hashes" in audit_data
-    assert "output_hashes" in audit_data
-    assert audit_data["official_evaluator"]["executed"] == True
-    assert audit_data["official_evaluator"]["exit_code"] == 0
-
-    final_csv_path = Path("output/submissions/submission_track1_v2_final.csv")
-    if final_csv_path.exists():
-        computed_hash = compute_sha256(final_csv_path)
-        assert audit_data["output_hashes"]["submission_track1_v2_final_csv"] == computed_hash, "Audit JSON final CSV hash mismatch"

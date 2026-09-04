@@ -1,0 +1,72 @@
+{
+  "submission_filename": "submission_track1_v2_final.csv",
+  "proband_id_values": [
+    "PROBAND01"
+  ],
+  "funnel_chain": [
+    {
+      "step": "vcf_region_overlaps",
+      "count": 1531
+    },
+    {
+      "step": "vcf_pass_filtered_records",
+      "count": 1494
+    },
+    {
+      "step": "decomposed_alt_candidates_raw",
+      "count": 1497,
+      "reconciliation_note": "1,494 VCF PASS records yielded 1,497 candidates due to multiallelic decomposition"
+    },
+    {
+      "step": "annotated_candidates",
+      "count": 1497
+    },
+    {
+      "step": "vep_assigned_panel_gene_candidates",
+      "count": 434
+    },
+    {
+      "step": "phasing_eligible_candidates",
+      "count": 1178
+    },
+    {
+      "step": "candidate_pairs_evaluated_for_phasing",
+      "count": 111955
+    },
+    {
+      "step": "cis_supported_pairs_in_all_evaluated_pairs",
+      "count": 1,
+      "note": "2,925 cis pairs identified across all 111,955 read-evaluated pairs"
+    },
+    {
+      "step": "dual_functional_same_vep_gene_pairs_generated",
+      "count": 5
+    },
+    {
+      "step": "cis_supported_pairs_in_dual_functional_subset",
+      "count": 0
+    },
+    {
+      "step": "valid_dual_functional_recessive_pairs_retained",
+      "count": 4
+    },
+    {
+      "step": "final_submission_rows",
+      "count": 4
+    }
+  ],
+  "input_hashes": {
+    "panel_candidates_annotated_parquet": "b4cdbc3393507709e589731af62c0fa2da5b2497e6e6f22a56701c32ede7b72d",
+    "phasing_evidence_json": "4b1e028102d39d910c990f0fa62f46205b86da653e42b50566529fe95aa96c03"
+  },
+  "output_hashes": {
+    "submission_track1_v2_enriched_csv": "39777ec3bd94cd070e39bdba4c1ee8eb86120ebbf7fca79dc2515fab74fd9b15",
+    "submission_track1_v2_final_csv": "da287d933172343ffb096c5457cd38329905a05c72a9a25f4be0ff652bdf7a2c"
+  },
+  "official_evaluator": {
+    "executed": true,
+    "exit_code": 0,
+    "evaluator_sha256": "d155681e980713cf3e68510354fe19c8739c44599348e4bda614be0ea7c5b227",
+    "stdout_log": "work/logs/evaluator_submission_track1_v2.log"
+  }
+}

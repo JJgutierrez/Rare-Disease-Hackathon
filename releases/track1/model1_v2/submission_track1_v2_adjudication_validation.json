@@ -1,0 +1,22 @@
+[
+  {
+    "pair_id": "15:40209701:T:G__15:40220612:T:G",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "pair_id": "4:103138385:G:A__4:103145304:A:G",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "pair_id": "4:103138385:G:A__4:103141914:C:T",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "pair_id": "4:103141914:C:T__4:103145304:A:G",
+    "passed": true,
+    "errors": []
+  }
+]

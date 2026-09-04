@@ -1,0 +1,254 @@
+[
+  {
+    "evidence_packet": {
+      "pair_id": "15:40209701:T:G__15:40220612:T:G",
+      "gene_symbol": "BUB1B",
+      "clinical_hpo_terms": [
+        "HP:0001511 (Growth Retardation / IUGR)",
+        "HP:0001388 (Aneuploidy Mosaicism)"
+      ],
+      "variant_1": {
+        "grch38": "15:40209701:T>G",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.99,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "variant_2": {
+        "grch38": "15:40220612:T>G",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.99,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "phase": {
+        "state": "phase_ambiguous",
+        "is_trans": 0,
+        "interpretation": "neutral_uncertainty"
+      },
+      "cnv_screen": {
+        "status": "no_anomaly",
+        "interpretation": "screening_only"
+      },
+      "epcr_deterministic_score": 0.8475,
+      "rank": 1
+    },
+    "adjudication_card": {
+      "pair_id": "15:40209701:T:G__15:40220612:T:G",
+      "gene_symbol": "BUB1B",
+      "mechanism_hypothesis": "Recessive compound heterozygous loss-of-function/hypomorphic pair in BUB1B.",
+      "supportive_evidence": [
+        "Gene BUB1B is a primary canonical MVA locus.",
+        "Variant 1 is extremely rare or novel in population databases.",
+        "Variant 2 is extremely rare or novel in population databases."
+      ],
+      "contradictory_evidence": [],
+      "missing_evidence": [
+        "Phase state is ambiguous/unphased (neutral uncertainty)."
+      ],
+      "phase_interpretation": "unknown",
+      "phenotype_fit": "high",
+      "review_priority": "review",
+      "manual_review_required": true,
+      "rationale": "Candidate pair in BUB1B evaluated with deterministic EPCR 0.8475 (rank 1). Advisory adjudication retains pipeline rank.",
+      "unsupported_claim_detected": false
+    }
+  },
+  {
+    "evidence_packet": {
+      "pair_id": "4:103138385:G:A__4:103145304:A:G",
+      "gene_symbol": "CENPE",
+      "clinical_hpo_terms": [
+        "HP:0001511 (Growth Retardation / IUGR)",
+        "HP:0001388 (Aneuploidy Mosaicism)"
+      ],
+      "variant_1": {
+        "grch38": "4:103138385:G>A",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.84,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "variant_2": {
+        "grch38": "4:103145304:A>G",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.84,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "phase": {
+        "state": "phase_ambiguous",
+        "is_trans": 0,
+        "interpretation": "neutral_uncertainty"
+      },
+      "cnv_screen": {
+        "status": "no_anomaly",
+        "interpretation": "screening_only"
+      },
+      "epcr_deterministic_score": 0.735,
+      "rank": 2
+    },
+    "adjudication_card": {
+      "pair_id": "4:103138385:G:A__4:103145304:A:G",
+      "gene_symbol": "CENPE",
+      "mechanism_hypothesis": "Recessive compound heterozygous loss-of-function/hypomorphic pair in CENPE.",
+      "supportive_evidence": [
+        "Variant 1 is extremely rare or novel in population databases.",
+        "Variant 2 is extremely rare or novel in population databases."
+      ],
+      "contradictory_evidence": [],
+      "missing_evidence": [
+        "Gene CENPE is an extended mitotic checkpoint gene rather than core MVA locus.",
+        "Phase state is ambiguous/unphased (neutral uncertainty)."
+      ],
+      "phase_interpretation": "unknown",
+      "phenotype_fit": "moderate",
+      "review_priority": "review",
+      "manual_review_required": true,
+      "rationale": "Candidate pair in CENPE evaluated with deterministic EPCR 0.735 (rank 2). Advisory adjudication retains pipeline rank.",
+      "unsupported_claim_detected": false
+    }
+  },
+  {
+    "evidence_packet": {
+      "pair_id": "4:103138385:G:A__4:103141914:C:T",
+      "gene_symbol": "CENPE",
+      "clinical_hpo_terms": [
+        "HP:0001511 (Growth Retardation / IUGR)",
+        "HP:0001388 (Aneuploidy Mosaicism)"
+      ],
+      "variant_1": {
+        "grch38": "4:103138385:G>A",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.56,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "variant_2": {
+        "grch38": "4:103141914:C>T",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.56,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "phase": {
+        "state": "phase_ambiguous",
+        "is_trans": 0,
+        "interpretation": "neutral_uncertainty"
+      },
+      "cnv_screen": {
+        "status": "no_anomaly",
+        "interpretation": "screening_only"
+      },
+      "epcr_deterministic_score": 0.665,
+      "rank": 3
+    },
+    "adjudication_card": {
+      "pair_id": "4:103138385:G:A__4:103141914:C:T",
+      "gene_symbol": "CENPE",
+      "mechanism_hypothesis": "Recessive compound heterozygous loss-of-function/hypomorphic pair in CENPE.",
+      "supportive_evidence": [
+        "Variant 1 is extremely rare or novel in population databases.",
+        "Variant 2 is extremely rare or novel in population databases."
+      ],
+      "contradictory_evidence": [],
+      "missing_evidence": [
+        "Gene CENPE is an extended mitotic checkpoint gene rather than core MVA locus.",
+        "Phase state is ambiguous/unphased (neutral uncertainty)."
+      ],
+      "phase_interpretation": "unknown",
+      "phenotype_fit": "moderate",
+      "review_priority": "review",
+      "manual_review_required": true,
+      "rationale": "Candidate pair in CENPE evaluated with deterministic EPCR 0.665 (rank 3). Advisory adjudication retains pipeline rank.",
+      "unsupported_claim_detected": false
+    }
+  },
+  {
+    "evidence_packet": {
+      "pair_id": "4:103141914:C:T__4:103145304:A:G",
+      "gene_symbol": "CENPE",
+      "clinical_hpo_terms": [
+        "HP:0001511 (Growth Retardation / IUGR)",
+        "HP:0001388 (Aneuploidy Mosaicism)"
+      ],
+      "variant_1": {
+        "grch38": "4:103141914:C>T",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.56,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "variant_2": {
+        "grch38": "4:103145304:A>G",
+        "gt": "0/1",
+        "gq": 30,
+        "dp": 20,
+        "vep_impact": 0.56,
+        "gnomad_af": 0.0,
+        "cadd_phred": null,
+        "alphamissense_score": null,
+        "spliceai_max_ds": 0.0
+      },
+      "phase": {
+        "state": "phase_ambiguous",
+        "is_trans": 0,
+        "interpretation": "neutral_uncertainty"
+      },
+      "cnv_screen": {
+        "status": "no_anomaly",
+        "interpretation": "screening_only"
+      },
+      "epcr_deterministic_score": 0.665,
+      "rank": 4
+    },
+    "adjudication_card": {
+      "pair_id": "4:103141914:C:T__4:103145304:A:G",
+      "gene_symbol": "CENPE",
+      "mechanism_hypothesis": "Recessive compound heterozygous loss-of-function/hypomorphic pair in CENPE.",
+      "supportive_evidence": [
+        "Variant 1 is extremely rare or novel in population databases.",
+        "Variant 2 is extremely rare or novel in population databases."
+      ],
+      "contradictory_evidence": [],
+      "missing_evidence": [
+        "Gene CENPE is an extended mitotic checkpoint gene rather than core MVA locus.",
+        "Phase state is ambiguous/unphased (neutral uncertainty)."
+      ],
+      "phase_interpretation": "unknown",
+      "phenotype_fit": "moderate",
+      "review_priority": "review",
+      "manual_review_required": true,
+      "rationale": "Candidate pair in CENPE evaluated with deterministic EPCR 0.665 (rank 4). Advisory adjudication retains pipeline rank.",
+      "unsupported_claim_detected": false
+    }
+  }
+]

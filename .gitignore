@@ -12,3 +12,10 @@ work
 __pycache__/
 *.pyc
 .DS_Store
+
+# Model 2 protected run directory
+runs/
+*.parquet
+
+*.csv
+!rare-disease-hackathon-public/synthetic_examples/*.csv
