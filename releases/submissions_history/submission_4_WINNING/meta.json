@@ -1,0 +1,19 @@
+{
+  "submission_number": 4,
+  "proband_id": "PROBAND01",
+  "rank_points": 100.0,
+  "f_max": 1.0,
+  "f_max_epcr_threshold": 0.99,
+  "outcome": "\u2705 Full match at rank 1",
+  "target_gene": "BUB1B",
+  "chrom_1": "chr15",
+  "pos_1": 40209701,
+  "ref_1": "T",
+  "alt_1": "G",
+  "chrom_2": "chr15",
+  "pos_2": 40220612,
+  "ref_2": "T",
+  "alt_2": "G",
+  "finding_type": "primary",
+  "verdict": "PERFECT WINNING SCORE"
+}

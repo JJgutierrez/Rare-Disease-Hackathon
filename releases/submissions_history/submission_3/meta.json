@@ -1,0 +1,8 @@
+{
+  "submission_number": 3,
+  "proband_id": "PROBAND01",
+  "rank_points": 0.0,
+  "f_max": 0.0,
+  "outcome": "\u274c No match - true variant(s) not found in submission",
+  "root_cause": "All 10 rows used bare contig numbers (15) without chr prefix (chr15)"
+}

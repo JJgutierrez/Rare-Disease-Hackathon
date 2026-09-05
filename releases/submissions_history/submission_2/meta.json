@@ -1,0 +1,8 @@
+{
+  "submission_number": 2,
+  "proband_id": "PROBAND01",
+  "rank_points": 0.0,
+  "f_max": 0.0,
+  "outcome": "\u274c No match - true variant(s) not found in submission",
+  "root_cause": "Missing VEP annotations in raw VCF caused 10 random unannotated singletons to be selected"
+}
